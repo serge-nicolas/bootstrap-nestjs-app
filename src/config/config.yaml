@@ -1,0 +1,10 @@
+http:
+  host: 'localhost'
+  port: 3000
+db:
+  sqlite:
+    database: 'test.sqlite'
+entities:
+  - User
+  - Url
+  - UploadedFile
