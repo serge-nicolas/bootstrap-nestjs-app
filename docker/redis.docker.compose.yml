@@ -1,0 +1,20 @@
+services:
+  server:
+    build:
+      context: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3002:3002
+  redis:
+    profiles:
+      - services
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_PORT_NUMBER=6379
+    ports:
+      - 6379:6379
+    volumes:
+      - ./db/redis:/bitnami/redis/data
+    restart: unless-stopped
