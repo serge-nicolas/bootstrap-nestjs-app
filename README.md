@@ -49,7 +49,7 @@ $ yarn run test:cov
 ## Certificates
 
 ```bash
-$ mkcert -key-file ./src/cert/key.pem -cert-file ./src/cert/cert.pem localhost
+$ mkcert -key-file ./cert/key.pem -cert-file ./cert/cert.pem localhost
 ```
 
 

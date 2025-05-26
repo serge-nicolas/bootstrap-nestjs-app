@@ -10,8 +10,6 @@ import { NestFactory } from '@nestjs/core';
 import session from 'express-session';
 import { AppModule } from './app.module';
 
-import { ValidationPipe } from '@nestjs/common';
-
 import datasource, { entities } from './datasource';
 
 import type * as TypeOrmTypes from '@adminjs/typeorm/lib/index.d';
@@ -62,7 +60,7 @@ async function bootstrap() {
   AdminJS.registerAdapter({ Database, Resource });
 
   const admin = new AdminJS({
-    rootPath: '/admin',
+    rootPath: process.env.ADMINJS_ROOT_PATH || '/admin',
     resources: entities,
     componentLoader: {
       Dashboard: DashboardComponent,
@@ -71,10 +69,10 @@ async function bootstrap() {
 
   const adminRouter = AdminJSExpress.buildRouter(admin);
 
-  app.use('/admin', adminRouter);
+  app.use(process.env.ADMINJS_ROOT_PATH || '/admin', adminRouter);
   app.use(
     session({
-      secret: 'my-secret',
+      secret: process.env.APP_SECURITY_SECRET || 'my-secret',
       resave: false,
       saveUninitialized: false,
     }),
@@ -85,11 +83,24 @@ async function bootstrap() {
 
   app.use(helmet());
 
-  await app.listen(process.env.APP_PORT ?? 3000);
+  await app.listen(
+    process.env.APP_PORT || 3000,
+    process.env.APP_HOST || 'localhost',
+  );
+  return app;
 }
 bootstrap()
-  .then(() => {
-    appLogger.info('App bootstraped', 'Ready');
+  .then((app: any) => {
+    appLogger.info(
+      `App bootsraped, address: \thttps://${process.env.APP_HOST}:${process.env.APP_PORT ?? 3000}`,
+      'Ready',
+    );
+    appLogger.info(
+      `\t\t admin: \thttps://${process.env.APP_HOST}:${process.env.APP_PORT ?? 3000}${
+        process.env.ADMINJS_ROOT_PATH
+      }`,
+      'Ready',
+    );
   })
   .catch((error) => {
     console.error(error);

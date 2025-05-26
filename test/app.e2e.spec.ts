@@ -4,11 +4,11 @@ dotenv.config({
   path: resolve(__dirname, `../.env.${process.env.NODE_ENV}`),
 });
 
-import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
-import request from 'supertest';
-import { App } from 'supertest/types';
-import { AppModule } from '../src/app.module';
+// import { Test, TestingModule } from '@nestjs/testing';
+// import { INestApplication } from '@nestjs/common';
+// import request from 'supertest';
+// import { App } from 'supertest/types';
+// import { AppModule } from '../src/app.module';
 
 import { describe, it, beforeEach, expect } from 'vitest';
 
