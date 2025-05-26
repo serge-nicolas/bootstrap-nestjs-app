@@ -2,7 +2,9 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Bootstrap NestJS with typeorm and adminjs.
+
+Adminjs can't have customized pages because of cjs/esm conflicts and other issues. NodeJS 24 can solve the problem.
 
 ## Project setup
 
@@ -35,19 +37,14 @@ $ yarn run test:e2e
 # test coverage
 $ yarn run test:cov
 ```
+# Features
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ yarn install -g mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+- [x] image upload to server (seaweedfs S3 compatible)
+- [] authentication (RBAC)
+- [] authorization
+- [] user management
+- [] role management
+- [] customized adminjs componnents
 
 ## Certificates
 
@@ -57,8 +54,9 @@ $ mkcert -key-file ./src/cert/key.pem -cert-file ./src/cert/cert.pem localhost
 
 
 ## Generate
+### modules
 ```bash
-$ nest g mo path/to/module [path]
+$ nest g mo ./src/modules/module module
 ```
 
 
